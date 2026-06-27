@@ -24,7 +24,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -206,6 +207,7 @@ h2 {
 }
 
 .control span,
+.select-row,
 .color-row,
 .toggle-row {
   display: flex;
@@ -214,6 +216,20 @@ h2 {
   gap: 12px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.select-row {
+  margin-bottom: 14px;
+}
+
+.select-row select {
+  width: 152px;
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 10px;
+  background: var(--panel-2);
+  color: var(--text);
 }
 
 output {

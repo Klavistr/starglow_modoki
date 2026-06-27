@@ -45,18 +45,44 @@
 
         <div class="panel-section">
           <h2>抽出</h2>
+          <label class="select-row">
+            <span>入力チャンネル</span>
+            <select id="inputChannel">
+              <option value="luminance">Luminance</option>
+              <option value="lightness">Lightness</option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="alpha">Alpha</option>
+            </select>
+          </label>
           <label class="control">
             <span>しきい値 <output id="thresholdValue"></output></span>
             <input id="threshold" type="range" min="0" max="255" value="176">
           </label>
           <label class="control">
-            <span>反応量 <output id="gainValue"></output></span>
+            <span>Threshold Soft <output id="thresholdSoftValue"></output></span>
+            <input id="thresholdSoft" type="range" min="1" max="160" value="44">
+          </label>
+          <label class="control">
+            <span>Boost Light <output id="gainValue"></output></span>
             <input id="gain" type="range" min="0" max="300" value="145">
           </label>
         </div>
 
         <div class="panel-section">
           <h2>光条</h2>
+          <label class="select-row">
+            <span>形</span>
+            <select id="shapePreset">
+              <option value="even">Eight Point</option>
+              <option value="cross">Cross</option>
+              <option value="diagonal">Diagonal</option>
+              <option value="vertical">Vertical</option>
+              <option value="horizontal">Horizontal</option>
+              <option value="prism">Prism Spread</option>
+            </select>
+          </label>
           <label class="control">
             <span>長さ <output id="streakLengthValue"></output></span>
             <input id="streakLength" type="range" min="8" max="180" value="74">
@@ -67,7 +93,7 @@
           </label>
           <label class="control">
             <span>方向数 <output id="raysValue"></output></span>
-            <input id="rays" type="range" min="2" max="12" step="2" value="8">
+            <input id="rays" type="range" min="2" max="8" step="2" value="8">
           </label>
           <label class="control">
             <span>回転 <output id="rotationValue"></output></span>
@@ -86,13 +112,35 @@
             <input id="glowIntensity" type="range" min="0" max="300" value="95">
           </label>
           <label class="control">
-            <span>合成量 <output id="mixValue"></output></span>
+            <span>Starglow Opacity <output id="mixValue"></output></span>
             <input id="mix" type="range" min="0" max="200" value="115">
+          </label>
+          <label class="control">
+            <span>Source Opacity <output id="sourceOpacityValue"></output></span>
+            <input id="sourceOpacity" type="range" min="0" max="100" value="100">
+          </label>
+          <label class="select-row">
+            <span>Transfer Mode</span>
+            <select id="transferMode">
+              <option value="lighter">Add</option>
+              <option value="screen">Screen</option>
+              <option value="overlay">Overlay</option>
+            </select>
           </label>
         </div>
 
         <div class="panel-section">
           <h2>色</h2>
+          <label class="select-row">
+            <span>Colormap</span>
+            <select id="colormap">
+              <option value="prism">Prism</option>
+              <option value="white">White</option>
+              <option value="rgb">RGB</option>
+              <option value="warm">Warm</option>
+              <option value="cool">Cool</option>
+            </select>
+          </label>
           <label class="color-row">
             <span>光の色</span>
             <input id="tint" type="color" value="#dfeaff">
@@ -100,6 +148,22 @@
           <label class="toggle-row">
             <input id="useSourceColor" type="checkbox" checked>
             <span>元画像の色を混ぜる</span>
+          </label>
+        </div>
+
+        <div class="panel-section">
+          <h2>Shimmer</h2>
+          <label class="control">
+            <span>Amount <output id="shimmerAmountValue"></output></span>
+            <input id="shimmerAmount" type="range" min="0" max="100" value="14">
+          </label>
+          <label class="control">
+            <span>Detail <output id="shimmerDetailValue"></output></span>
+            <input id="shimmerDetail" type="range" min="1" max="10" value="4">
+          </label>
+          <label class="control">
+            <span>Phase <output id="shimmerPhaseValue"></output></span>
+            <input id="shimmerPhase" type="range" min="0" max="360" value="35">
           </label>
         </div>
       </aside>
