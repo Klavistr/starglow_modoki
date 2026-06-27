@@ -1,0 +1,280 @@
+:root {
+  color-scheme: dark;
+  --bg: #101116;
+  --panel: #1b1d24;
+  --panel-2: #242833;
+  --line: #383d4a;
+  --text: #f1f3f7;
+  --muted: #a8adba;
+  --accent: #77d7c8;
+  --accent-2: #f0ca63;
+  --danger: #ff7a90;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  min-height: 100vh;
+}
+
+.workspace {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: #15171d;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 720;
+  letter-spacing: 0;
+}
+
+.topbar p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+button,
+.file-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 14px;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover,
+.file-button:hover {
+  border-color: var(--accent);
+}
+
+.file-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#downloadButton {
+  background: #263b38;
+  border-color: #3b6d65;
+}
+
+.preview-shell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(45deg, #191b22 25%, transparent 25%),
+    linear-gradient(-45deg, #191b22 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #191b22 75%),
+    linear-gradient(-45deg, transparent 75%, #191b22 75%);
+  background-color: #111219;
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+  background-size: 24px 24px;
+}
+
+.preview-shell.is-dragging {
+  outline: 2px solid var(--accent);
+  outline-offset: -8px;
+}
+
+#previewCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border: 1px solid #303542;
+  background: #08090d;
+  box-shadow: 0 18px 60px rgb(0 0 0 / 42%);
+}
+
+.empty-state {
+  position: absolute;
+  display: grid;
+  gap: 6px;
+  place-items: center;
+  padding: 20px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.empty-state strong {
+  color: var(--text);
+  font-size: 20px;
+}
+
+.empty-state.is-hidden {
+  display: none;
+}
+
+.panel {
+  display: grid;
+  align-content: start;
+  gap: 1px;
+  border-left: 1px solid var(--line);
+  background: var(--line);
+  overflow-y: auto;
+}
+
+.panel-section {
+  padding: 18px;
+  background: var(--panel);
+}
+
+h2 {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 720;
+  color: #daddE7;
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.preset {
+  width: 100%;
+  min-height: 36px;
+}
+
+.preset.is-active {
+  background: #2f4843;
+  border-color: var(--accent);
+}
+
+.control {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.control:first-of-type {
+  margin-top: 0;
+}
+
+.control span,
+.color-row,
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+output {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.color-row {
+  margin-bottom: 14px;
+}
+
+input[type="color"] {
+  width: 48px;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-2);
+}
+
+.toggle-row {
+  justify-content: flex-start;
+}
+
+.toggle-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .actions > * {
+    flex: 1;
+  }
+
+  .preview-shell {
+    min-height: 55vh;
+    padding: 12px;
+  }
+}
