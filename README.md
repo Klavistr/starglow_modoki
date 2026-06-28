@@ -1,20 +1,17 @@
-# Starglow Modoki
+# starglow_modoki
 
-After Effects の Starglow 風に、静止画の明るい部分から8方向の光条とグローを作る小さなブラウザツールです。
+A browser-based still image tool for creating Starglow-style star streaks from image highlights.
 
-## 使い方
+## Usage
 
-1. `index.html` をブラウザで開く。
-2. 画像をドロップするか、「画像を開く」から読み込む。
-3. プリセット、入力チャンネル、しきい値、カラーマップ、Shimmerで見た目を調整する。
-4. 「PNG保存」で書き出す。
+1. Open `index.html` in a browser.
+2. Drop an image into the preview pane or use `Open`.
+3. Pick a preset, then adjust channels, thresholds, masks, individual lengths, colormaps, shimmer, opacity, and transfer mode.
+4. Use `Save PNG` to export the result.
 
-## 調整のコツ
+## Notes
 
-- `入力チャンネル` で、どの成分からハイライトを拾うかを選べます。
-- `しきい値` を上げると、本当に明るい部分だけが光ります。
-- `Threshold Soft` を上げると、ハイライト境界が柔らかくなります。
-- `Boost Light` を上げると、抽出された光が強くなります。
-- `形` と `Colormap` で、8方向の長さと色の出方が変わります。
-- `Shimmer` は静止画でも光条に有機的な揺らぎを足します。
-- `Source Opacity` と `Transfer Mode` で、元画像との合成具合を調整できます。
+- The preview pane scales images down to fit by default and does not upscale them.
+- Parameter groups are collapsed by default.
+- Numeric boxes can exceed slider min/max values; sliders stay clamped to their displayed range.
+- `Streak Length` moves all individual lengths. Hold Ctrl while changing it to scale lengths relatively.

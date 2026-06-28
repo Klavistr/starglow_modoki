@@ -1,171 +1,47 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Starglow Modoki</title>
+    <title>starglow_modoki</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main class="app">
-      <section class="workspace" aria-label="Preview">
-        <div class="topbar">
-          <div>
-            <h1>Starglow Modoki</h1>
-            <p>光っている部分から星形グローを作る静止画ツール</p>
+      <section class="left-pane" aria-label="Image workspace">
+        <header class="command-pane">
+          <div class="brand">
+            <div class="ae-mark">Ae</div>
+            <h1>starglow_modoki</h1>
           </div>
-          <div class="actions">
-            <label class="file-button">
+          <div class="command-actions">
+            <label class="button">
               <input id="fileInput" type="file" accept="image/*">
-              画像を開く
+              Open
             </label>
-            <button id="downloadButton" type="button">PNG保存</button>
+            <button id="saveButton" type="button">Save PNG</button>
           </div>
-        </div>
+        </header>
 
-        <div id="dropZone" class="preview-shell">
-          <canvas id="previewCanvas" width="1280" height="820"></canvas>
-          <div id="emptyState" class="empty-state">
-            <strong>画像をドロップ</strong>
-            <span>または右上のボタンから開く</span>
+        <section id="previewPane" class="preview-pane" aria-label="Preview pane">
+          <div id="viewport" class="viewport">
+            <canvas id="previewCanvas" width="1280" height="820"></canvas>
+            <div id="emptyState" class="empty-state">
+              <strong>Drop an image</strong>
+              <span>or use Open</span>
+            </div>
           </div>
-        </div>
+        </section>
       </section>
 
-      <aside class="panel" aria-label="Controls">
-        <div class="panel-section">
-          <h2>プリセット</h2>
-          <div class="preset-grid">
-            <button class="preset is-active" type="button" data-preset="classic">Classic</button>
-            <button class="preset" type="button" data-preset="soft">Soft</button>
-            <button class="preset" type="button" data-preset="neon">Neon</button>
-            <button class="preset" type="button" data-preset="sharp">Sharp</button>
-          </div>
-        </div>
-
-        <div class="panel-section">
-          <h2>抽出</h2>
-          <label class="select-row">
-            <span>入力チャンネル</span>
-            <select id="inputChannel">
-              <option value="luminance">Luminance</option>
-              <option value="lightness">Lightness</option>
-              <option value="red">Red</option>
-              <option value="green">Green</option>
-              <option value="blue">Blue</option>
-              <option value="alpha">Alpha</option>
-            </select>
-          </label>
-          <label class="control">
-            <span>しきい値 <output id="thresholdValue"></output></span>
-            <input id="threshold" type="range" min="0" max="255" value="176">
-          </label>
-          <label class="control">
-            <span>Threshold Soft <output id="thresholdSoftValue"></output></span>
-            <input id="thresholdSoft" type="range" min="1" max="160" value="44">
-          </label>
-          <label class="control">
-            <span>Boost Light <output id="gainValue"></output></span>
-            <input id="gain" type="range" min="0" max="300" value="145">
+      <aside class="controls-pane" aria-label="Effect controls">
+        <div class="top-control">
+          <label class="field-row">
+            <span>Preset</span>
+            <select id="presetSelect"></select>
           </label>
         </div>
-
-        <div class="panel-section">
-          <h2>光条</h2>
-          <label class="select-row">
-            <span>形</span>
-            <select id="shapePreset">
-              <option value="even">Eight Point</option>
-              <option value="cross">Cross</option>
-              <option value="diagonal">Diagonal</option>
-              <option value="vertical">Vertical</option>
-              <option value="horizontal">Horizontal</option>
-              <option value="prism">Prism Spread</option>
-            </select>
-          </label>
-          <label class="control">
-            <span>長さ <output id="streakLengthValue"></output></span>
-            <input id="streakLength" type="range" min="8" max="180" value="74">
-          </label>
-          <label class="control">
-            <span>強さ <output id="streakIntensityValue"></output></span>
-            <input id="streakIntensity" type="range" min="0" max="300" value="118">
-          </label>
-          <label class="control">
-            <span>方向数 <output id="raysValue"></output></span>
-            <input id="rays" type="range" min="2" max="8" step="2" value="8">
-          </label>
-          <label class="control">
-            <span>回転 <output id="rotationValue"></output></span>
-            <input id="rotation" type="range" min="0" max="180" value="18">
-          </label>
-        </div>
-
-        <div class="panel-section">
-          <h2>グロー</h2>
-          <label class="control">
-            <span>広がり <output id="glowRadiusValue"></output></span>
-            <input id="glowRadius" type="range" min="0" max="90" value="32">
-          </label>
-          <label class="control">
-            <span>明るさ <output id="glowIntensityValue"></output></span>
-            <input id="glowIntensity" type="range" min="0" max="300" value="95">
-          </label>
-          <label class="control">
-            <span>Starglow Opacity <output id="mixValue"></output></span>
-            <input id="mix" type="range" min="0" max="200" value="115">
-          </label>
-          <label class="control">
-            <span>Source Opacity <output id="sourceOpacityValue"></output></span>
-            <input id="sourceOpacity" type="range" min="0" max="100" value="100">
-          </label>
-          <label class="select-row">
-            <span>Transfer Mode</span>
-            <select id="transferMode">
-              <option value="lighter">Add</option>
-              <option value="screen">Screen</option>
-              <option value="overlay">Overlay</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="panel-section">
-          <h2>色</h2>
-          <label class="select-row">
-            <span>Colormap</span>
-            <select id="colormap">
-              <option value="prism">Prism</option>
-              <option value="white">White</option>
-              <option value="rgb">RGB</option>
-              <option value="warm">Warm</option>
-              <option value="cool">Cool</option>
-            </select>
-          </label>
-          <label class="color-row">
-            <span>光の色</span>
-            <input id="tint" type="color" value="#dfeaff">
-          </label>
-          <label class="toggle-row">
-            <input id="useSourceColor" type="checkbox" checked>
-            <span>元画像の色を混ぜる</span>
-          </label>
-        </div>
-
-        <div class="panel-section">
-          <h2>Shimmer</h2>
-          <label class="control">
-            <span>Amount <output id="shimmerAmountValue"></output></span>
-            <input id="shimmerAmount" type="range" min="0" max="100" value="14">
-          </label>
-          <label class="control">
-            <span>Detail <output id="shimmerDetailValue"></output></span>
-            <input id="shimmerDetail" type="range" min="1" max="10" value="4">
-          </label>
-          <label class="control">
-            <span>Phase <output id="shimmerPhaseValue"></output></span>
-            <input id="shimmerPhase" type="range" min="0" max="360" value="35">
-          </label>
-        </div>
+        <div id="controlsRoot" class="controls-root"></div>
       </aside>
     </main>
 
